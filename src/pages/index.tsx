@@ -6,10 +6,9 @@ import React, {useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import Image from "next/image";
 import {useCheckUser} from "@/app/hooks";
-import {Stack} from "@mui/material";
+import {Grid, Stack} from "@mui/material";
 import RecentMessages from "@/components/layout/recentMesseages";
 import ChatSection from "@/components/layout/chatSection";
-
 
 
 const IndexPage: NextPage = () => {
@@ -30,16 +29,19 @@ const IndexPage: NextPage = () => {
 
     return (
         <div>
-
             <Head>
                 <title>RASA MESSENGER</title>
             </Head>
-           <Stack direction={"row"}>
-               <RecentMessages />
-               <ChatSection />
-           </Stack>
+            <Grid container direction={"row"}>
+                <Grid item md={3}>
 
+                    <RecentMessages/>
+                </Grid>
+                <Grid item md={9}>
 
+                    <ChatSection/>
+                </Grid>
+            </Grid>
         </div>
     )
 }
