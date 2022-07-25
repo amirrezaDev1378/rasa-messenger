@@ -1,5 +1,4 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
-import type {NextApiHandler} from 'next'
 import Axios from 'axios';
 import {randEmail, randFullName} from '@ngneat/falso';
 
