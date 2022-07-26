@@ -39,6 +39,7 @@ const IndexPage: NextPage = () => {
                 </Grid>
                 <Grid item md={9}>
 
+
                     <ChatSection/>
                 </Grid>
             </Grid>

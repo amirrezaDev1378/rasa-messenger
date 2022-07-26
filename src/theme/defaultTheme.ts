@@ -3,28 +3,29 @@ import {responsiveFontSizes} from "@mui/material";
 
 const defaultTheme = createTheme({
     typography: {
-        body1: {
+
+        h3: {
+            fontSize: "1.3rem",
+            color: "white"
+        },
+        h2: {
+            fontSize: "1.5rem",
+            color: "white"
+        },
+        body2: {
             fontSize: "0.8rem",
+            color: "#868e96"
         },
-        h5:{
-            fontWeight:"100"
-        },
-        h3:{
-            fontWeight:"150",
-            fontSize:"1.2rem"
-        },
-        h1:{
-            fontWeight:"200",
-            fontSize:"2rem"
-        }
+
+
 
     },
     palette: {
         success: {
-            main: "#00E38C",
-        },
-        secondary:{
-            main:"#8990AD"
+            main: "#53E04E",
+            dark: "#3c9f39",
+            light: "#7ce777",
+
         }
     },
 });

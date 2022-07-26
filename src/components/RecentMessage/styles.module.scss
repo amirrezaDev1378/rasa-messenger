@@ -1,0 +1,30 @@
+.recentMessageBox{
+  padding: 10px;
+  margin: 10px;
+  background-color: #151A21;
+  border-radius: 10px;
+  transition: 0.3s all;
+  cursor: pointer;
+  user-select: none;
+  &:hover{
+    background-color: #262a34;
+    border-radius: 12px;
+    .badge{
+      border: #262a34 3px solid;
+    }
+  }
+  .avatar{
+    width:80px!important;
+    height: 80px!important;
+    border-radius: 15px!important;
+
+  }
+  .badge{
+    border: #151A21 3px solid;
+  }
+  .badgeRoot{
+    height: min-content;
+
+  }
+
+}

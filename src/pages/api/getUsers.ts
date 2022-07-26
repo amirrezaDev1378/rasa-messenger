@@ -26,6 +26,7 @@ const getRandomUsers = async () => {
             gender = "male"
         }
         users.push({
+            id:i,
             email: randEmail(),
             name: randFullName({gender}),
             lastTimeVisited: getRandomDate(),
