@@ -16,6 +16,7 @@ const IndexPage: NextPage = () => {
     const router = useRouter();
     const [users, setUsers] = useState(null);
     const [localUser, setLocalUser] = useState(null);
+
     useEffect(() => {
         if (!IsLocalUserAvailable) {
             router.push("/createNewSession");
@@ -29,9 +30,13 @@ const IndexPage: NextPage = () => {
 
     return (
         <div>
+
             <Head>
                 <title>RASA MESSENGER</title>
             </Head>
+
+            {localUser &&
+
             <Grid container direction={"row"}>
                 <Grid item md={3}>
 
@@ -43,6 +48,9 @@ const IndexPage: NextPage = () => {
                     <ChatSection/>
                 </Grid>
             </Grid>
+
+            }
+
         </div>
     )
 }

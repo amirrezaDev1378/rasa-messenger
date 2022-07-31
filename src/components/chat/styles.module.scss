@@ -1,0 +1,37 @@
+.avatar{
+  width: auto !important;
+  height: auto !important;
+  border-radius: 25px!important;
+
+}
+.chatContainer:not(.localUser){
+  padding-right: 15px;
+}
+.localUser{
+  padding-left: 15px;
+}
+.chatText{
+  width: 100%;
+}
+.chatUserName{
+  width: fit-content;
+  margin: 5px 0!important;
+}
+.chatContainer{
+  border-radius: 20px;
+  transition: all 0.3s;
+
+  background-color: #151A21;
+  max-width: 60%;
+  min-width: 30%;
+  width: max-content;
+
+  margin: 10px;
+  &:hover{
+    background-color: #282c36;
+
+  }
+}
+.chatTextContainer{
+  padding: 15px;
+}

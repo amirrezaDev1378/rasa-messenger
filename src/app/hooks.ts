@@ -8,15 +8,4 @@ export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export const useAppSelector: TypedUseSelectorHook<AppState> = useSelector
 
-export const useGetPostsById = async (id: { id: number }) => {
-    const api = axios.create({
-        baseURL: 'https://jsonplaceholder.typicode.com/posts/',
-        timeout: 4000,
-        headers: {},
-        method: "GET",
-    })
-    return api.get(String(id.id));
-};
-
-
 export const useCheckUser = checkUser;

@@ -4,37 +4,40 @@ import {CircularProgress, Skeleton, Typography} from "@mui/material";
 import {useLoadRecentMessages} from "@/app/useLoadRecentMessages";
 import styles from "./styles.module.scss"
 import {DriveFileRenameOutlineOutlined} from "@mui/icons-material";
+
 const RecentMessages: React.FC = () => {
     const [isMessagesLoaded, setIsMessagesLoaded] = useState(false);
-    const [messages, setMessages] = useState([]);
-    useEffect(() => {
-        if (!isMessagesLoaded) {
+    const [messages, setMessages] = useState(null);
+
+    if (!isMessagesLoaded) {
+        if (messages) {
+            setIsMessagesLoaded(true);
+        } else {
             const messageLoader = useLoadRecentMessages();
             messageLoader.then(
                 (msg: Array<object>) => {
                     setMessages(msg);
-                    setIsMessagesLoaded(true);
                 }
             );
         }
-    }, []);
 
+    }
 
     return (
-        <div>
+        <div className={"mame"}>
             <Typography display={"flex"} justifyContent={"space-evenly"} flexDirection={"row"} className={styles.mainBox} variant={"h2"}>
 
-                Recent Messages <DriveFileRenameOutlineOutlined />
+                Recent Messages <DriveFileRenameOutlineOutlined/>
             </Typography>
             {
-                !isMessagesLoaded ?
+                !isMessagesLoaded && !messages ?
 
                     <>
                         <Skeleton height={"100vh"} style={{borderRadius: 25}} width={"100%"} animation={"wave"} variant={"rectangular"}/>
                     </>
 
                     :
-                    <div>
+                    <div className={styles.scrollable}>
                         {
                             messages.map((msg, i) => {
                                 return <RecentMessage key={i} message={msg}/>

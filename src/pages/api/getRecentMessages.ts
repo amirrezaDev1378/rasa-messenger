@@ -7,8 +7,21 @@ const getRandomMessages = async () => {
     let messages = [];
     for (let i = 0; i < 25; i++) {
         messages.push({userId: i + 1, messages: []});
-        messages[i].messages.push(randText({length: 5 + Math.floor(Math.random() * 4), charCount: 100 + Math.floor(Math.random() * 50)}));
+        for (let j = 0; j < 30; j++) {
+            const dummyMessage = randText({length: 1, charCount: 85 + Math.floor(Math.random() * 50)});
+
+            if (j % 2 === 0 || j % 3 === 0) {
+                messages[i].messages.push({isLocalUser: false, msg: dummyMessage});
+                messages[i].messages.push({isLocalUser: true, msg: dummyMessage});
+
+            } else {
+                messages[i].messages.push({isLocalUser: false, msg: dummyMessage});
+                messages[i].messages.push({isLocalUser: false, msg: dummyMessage});
+
+            }
+        }
     }
+    console.log("mame", messages)
     return messages;
 }
 

@@ -13,3 +13,9 @@ export function useGetUsersInfo() {
         return users;
     }
 }
+export function useGetLocalUserInfo() {
+    if (typeof window !== "undefined") {
+        const user = JSON.parse(window.localStorage.getItem("LocalUser"));
+        return user;
+    }
+}

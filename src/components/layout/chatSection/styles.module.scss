@@ -1,0 +1,16 @@
+.headerMain{
+background-color:#171C23;
+}
+
+.chatMainGrid{
+  position: absolute;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  top: 0;
+  bottom: 0;
+  //width: fit-content !important;
+  max-width: 75% !important;
+}
+.chatMain{
+  width: 100%;
+}

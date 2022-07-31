@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {NextPage} from "next";
-import {useCheckUser} from "../../app/hooks";
+import {useCheckUser} from "@/app/hooks";
 import {useRouter} from "next/router";
 import useCreateSession from "../../app/useCreateSession";
 

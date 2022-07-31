@@ -6,8 +6,11 @@ import {CacheProvider, EmotionCache} from '@emotion/react';
 import {ThemeProvider, CssBaseline, createTheme} from '@mui/material';
 import createEmotionCache from '../utility/EmotionCache';
 import store from '../app/store'
-import React from "react";
+import React, {Fragment, Suspense} from "react";
 import defaultTheme from "../theme/defaultTheme";
+
+
+
 interface MyAppProps extends AppProps {
     emotionCache?: EmotionCache;
 }
@@ -18,16 +21,23 @@ const MyApp: React.FunctionComponent<MyAppProps> = (props) => {
 
     const {Component, emotionCache = clientSideEmotionCache, pageProps} = props;
     return (
+
         <Provider store={store}>
             <ThemeProvider theme={defaultTheme}>
                 <CacheProvider value={emotionCache}>
                     <CssBaseline/>
 
-                    <Component {...pageProps} />
+
+
+                        <Component {...pageProps} />
+
+
                 </CacheProvider>
             </ThemeProvider>
 
+
         </Provider>
+
     )
 }
 

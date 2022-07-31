@@ -1,15 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 
-import postsReducer from '../features/posts/postsSlice'
+import messagesSlice from '../redux/messages/messagesSlice'
 
 export function makeStore() {
   return configureStore({
-    reducer: { posts: postsReducer },
+    reducer: { messages: messagesSlice },
 
   })
 }
 
-const store = makeStore()
+export const store = makeStore()
 
 export type AppState = ReturnType<typeof store.getState>
 

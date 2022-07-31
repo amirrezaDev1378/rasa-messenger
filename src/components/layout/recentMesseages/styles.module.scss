@@ -1,5 +1,15 @@
 .mainBox{
-  border: #0c1218 2px solid;
   padding: 20px;
   margin: 0 10px !important;
+}
+
+.scrollable{
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  height: 90vh;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

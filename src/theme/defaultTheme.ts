@@ -16,6 +16,10 @@ const defaultTheme = createTheme({
             fontSize: "0.8rem",
             color: "#868e96"
         },
+        body1: {
+            fontSize: "1rem",
+            color: "#ffffff"
+        },
 
 
 
