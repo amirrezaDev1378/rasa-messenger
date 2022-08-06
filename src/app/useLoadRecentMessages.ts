@@ -1,3 +1,5 @@
+import {randText} from "@ngneat/falso";
+
 export function useLoadRecentMessages() {
     if (typeof window !== "undefined") {
         return new Promise((resolve, reject) => {
@@ -15,7 +17,8 @@ export function useLoadRecentMessages() {
 
 export function useLoadRecentMessagesById(id: number) {
     if (typeof window !== "undefined") {
+        const filteredId = id === 0 ? 1 : id - 1;
         const messages = JSON.parse(window.localStorage.getItem("Messages"));
-        return messages[id - 1];
+        return messages[filteredId];
     }
 }

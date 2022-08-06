@@ -1,5 +1,6 @@
 import {randFullName} from "@ngneat/falso";
 import Axios from "axios";
+import {useGetDummyInitialMessages} from "@/app/useGetDummyInitialMessages";
 
 const useCreateSession = async () => {
     if (typeof window !== "undefined") {
@@ -8,7 +9,7 @@ const useCreateSession = async () => {
 
             const LocalUserAvatar = await Axios.get("/api/getAvatar");
             const randomUsers = await Axios.get("/api/getUsers");
-            const randomMessages = await Axios.get("/api/getRecentMessages");
+            // const randomMessages = await Axios.get("/api/getRecentMessages");
 
             const LocalUserName = randFullName({gender: "female"});
             // inject into localstorage
@@ -18,7 +19,7 @@ const useCreateSession = async () => {
                 avatar: LocalUserAvatar.data
             }));
             localStorage.setItem('Users', JSON.stringify(randomUsers.data));
-            localStorage.setItem('Messages', JSON.stringify(randomMessages.data));
+            localStorage.setItem('Messages', JSON.stringify(await useGetDummyInitialMessages()));
             return "Session created successfully";
         } catch (e) {
             return `Error creating session => \n ${e}`;

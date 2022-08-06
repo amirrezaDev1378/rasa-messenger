@@ -5,19 +5,32 @@ import Head from 'next/head'
 import React, {useEffect, useRef, useState} from "react";
 import {useRouter} from "next/router";
 import Image from "next/image";
-import {useCheckUser} from "@/app/hooks";
+import {useAppDispatch, useCheckUser} from "@/app/hooks";
 import {Grid, Stack} from "@mui/material";
 import RecentMessages from "@/components/layout/recentMesseages";
 import ChatSection from "@/components/layout/chatSection";
+import {useAddMessageUpdater, useSendMessage, useSocketIo} from "@/app/useSocketio";
+import {addServerMessage} from "@/redux/messages/messagesSlice";
 
 
 const IndexPage: NextPage = () => {
     const IsLocalUserAvailable = useCheckUser();
+    let dispatch = useAppDispatch()
+
     const router = useRouter();
     const [users, setUsers] = useState(null);
     const [localUser, setLocalUser] = useState(null);
 
     useEffect(() => {
+        useSocketIo();
+
+        useAddMessageUpdater((data) => {
+            if (data.sender === "server") {
+
+                dispatch(addServerMessage({sender: "server", msg: data.message}))
+            }
+        })
+
         if (!IsLocalUserAvailable) {
             router.push("/createNewSession");
             return;
@@ -37,17 +50,17 @@ const IndexPage: NextPage = () => {
 
             {localUser &&
 
-            <Grid container direction={"row"}>
-                <Grid item md={3}>
+                <Grid container direction={"row"}>
+                    <Grid item md={3}>
 
-                    <RecentMessages/>
+                        <RecentMessages/>
+                    </Grid>
+                    <Grid item md={9}>
+
+
+                        <ChatSection/>
+                    </Grid>
                 </Grid>
-                <Grid item md={9}>
-
-
-                    <ChatSection/>
-                </Grid>
-            </Grid>
 
             }
 

@@ -6,61 +6,62 @@ import Chat from "@/components/chat/chat";
 import {useGetLocalUserInfo} from "@/app/useGetUserInfo";
 import styles from "../styles.module.scss";
 
-const ChatMain: React.FC = () => {
-    const pageData = useAppSelector(selectData)
-    const dispatch = useAppDispatch();
+interface chatSectionProps {
+    currentChat: {
+        messages: {
+            messages: Array<any>
+        };
+        currentUser: {
+            id: string,
+            avatar: string,
+            name: string
+        };
+    }
 
-    const [currentChat, setCurrentChat] = useState(null);
+}
 
-    useEffect(() => {
-        if (pageData.messages && pageData.currentUser) {
-            setCurrentChat({status: pageData.status, messages: JSON.parse(pageData.messages), currentUser: JSON.parse(pageData.currentUser)})
-        }
-    }, [pageData]);
+const ChatMain: React.FC<chatSectionProps> = ({currentChat}) => {
+
     const LocalUser = useGetLocalUserInfo();
 
     return (
         <div className={styles.chatMain}>
             {
-                !currentChat?.messages ?
-                    <>
-                        <Skeleton animation={"wave"} variant={"rectangular"} width={"100%"} height={"100%"}/>
-                    </>
-                    :
-                    <>
-                        {
-                            currentChat.messages.messages.map(function (obj, i) {
 
-                                if (obj.isLocalUser) {
-                                    const avatar = LocalUser.avatar;
-                                    const name = LocalUser.name;
-                                    return (
-                                        <Chat
-                                            key={i}
-                                            text={obj.msg}
-                                            avatar={avatar}
-                                            name={name}
-                                            isLocalUser={obj.isLocalUser}
-                                        />
-                                    )
-                                } else {
-                                    const avatar = currentChat.currentUser.avatar;
-                                    const name = currentChat.currentUser.name;
-                                    return (
-                                        <Chat
-                                            key={i}
-                                            text={obj.msg}
-                                            avatar={avatar}
-                                            name={name}
-                                            isLocalUser={obj.isLocalUser}
-                                        />
-                                    )
-                                }
+                <>
+                    {
+                        currentChat.messages.messages.map(function (obj, i) {
 
-                            })
-                        }
+                            if (obj.isLocalUser) {
+                                const avatar = LocalUser.avatar;
+                                const name = LocalUser.name;
+                                return (
+                                    <Chat
+                                        key={i}
+                                        text={obj.msg}
+                                        avatar={avatar}
+                                        name={name}
+                                        isLocalUser={obj.isLocalUser}
+                                    />
+                                )
+                            } else {
+                                const avatar = currentChat.currentUser.avatar;
+                                const name = currentChat.currentUser.name;
+                                return (
+                                    <Chat
+                                        key={i}
+                                        text={obj.msg}
+                                        avatar={avatar}
+                                        name={name}
+                                        isLocalUser={obj.isLocalUser}
+                                    />
+                                )
+                            }
 
-                    </>
+                        })
+                    }
+
+                </>
             }
         </div>
     );

@@ -21,7 +21,6 @@ const getRandomMessages = async () => {
             }
         }
     }
-    console.log("mame", messages)
     return messages;
 }
 

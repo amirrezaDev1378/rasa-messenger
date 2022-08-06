@@ -4,7 +4,7 @@ import {CircularProgress, Skeleton, Typography} from "@mui/material";
 import {useLoadRecentMessages} from "@/app/useLoadRecentMessages";
 import styles from "./styles.module.scss"
 import {DriveFileRenameOutlineOutlined} from "@mui/icons-material";
-
+import MessageInput from "../../messageInput/index"
 const RecentMessages: React.FC = () => {
     const [isMessagesLoaded, setIsMessagesLoaded] = useState(false);
     const [messages, setMessages] = useState(null);
@@ -24,7 +24,7 @@ const RecentMessages: React.FC = () => {
     }
 
     return (
-        <div className={"mame"}>
+        <div>
             <Typography display={"flex"} justifyContent={"space-evenly"} flexDirection={"row"} className={styles.mainBox} variant={"h2"}>
 
                 Recent Messages <DriveFileRenameOutlineOutlined/>
@@ -37,14 +37,18 @@ const RecentMessages: React.FC = () => {
                     </>
 
                     :
-                    <div className={styles.scrollable}>
-                        {
-                            messages.map((msg, i) => {
-                                return <RecentMessage key={i} message={msg}/>
-                            })
-                        }
+                    <>
+                        <div className={styles.scrollable}>
+                            {
+                                messages.map((msg, i) => {
+                                    return <RecentMessage key={i} message={msg}/>
+                                })
+                            }
 
-                    </div>
+                        </div>
+
+                    </>
+
             }
 
 

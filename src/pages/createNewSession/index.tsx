@@ -13,7 +13,6 @@ const Session:NextPage = () => {
         }else{
             const session = useCreateSession();
             session.then((message) => {
-                console.log(message);
                 router.push("/");
             }).catch((error) => {
                 console.error(error);

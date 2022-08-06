@@ -8,7 +8,7 @@ import {useAppDispatch} from "@/app/hooks";
 
 interface messageType {
     message: {
-        userId: number,
+        id: number,
         messages: [{
             isLocalUser: boolean,
             msg: string
@@ -17,8 +17,8 @@ interface messageType {
 }
 
 const RecentMessage: React.FC<messageType> = (message) => {
-    const lastMessage = message.message.messages[message.message.messages.length - 1].msg[0].slice(0, 60);
-    const userInfo = useGetUserInfoById(message.message.userId);
+    const lastMessage = message.message.messages[message.message.messages.length - 1].msg.slice(0, 60);
+    const userInfo = useGetUserInfoById(message.message.id);
     const dispatch = useAppDispatch();
     if (!userInfo || !lastMessage) {
         return (<>
@@ -26,9 +26,9 @@ const RecentMessage: React.FC<messageType> = (message) => {
     }
     return (
         <Stack onClick={() => {
-            dispatch(changeCurrentChat(message.message.userId)).then(
+            dispatch(changeCurrentChat(message.message.id)).then(
                 () => {
-                    dispatch(changeCurrentChatUser(message.message.userId));
+                    dispatch(changeCurrentChatUser(message.message.id));
                 }
             )
         }} className={styles.recentMessageBox} direction={"row"} spacing={2}>

@@ -1,6 +1,9 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import Axios from 'axios';
 import {randEmail, randFullName} from '@ngneat/falso';
+import * as fs from "fs";
+import * as path from "path";
+import {json} from "stream/consumers";
 
 
 function getRandomDate() {
@@ -10,8 +13,8 @@ function getRandomDate() {
 }
 
 const getAvatar = async (gender) => {
-    const avatar = await Axios.get(`https://xsgames.co/randomusers/avatar.php?g=${gender}` , {
-        responseType:"arraybuffer"
+    const avatar = await Axios.get(`https://xsgames.co/randomusers/avatar.php?g=${gender}`, {
+        responseType: "arraybuffer"
     });
     const base64Image = Buffer.from(avatar.data, 'binary').toString('base64')
     return `data:image/png;base64,${base64Image}`;
@@ -26,13 +29,22 @@ const getRandomUsers = async () => {
             gender = "male"
         }
         users.push({
-            id:i,
+            id: i,
             email: randEmail(),
             name: randFullName({gender}),
             lastTimeVisited: getRandomDate(),
             avatar: await getAvatar(gender)
         })
     }
+    if (!fs.existsSync(path.join(__dirname, "../../database/"))){
+
+        fs.mkdirSync(path.join(__dirname, "../../database/"))
+
+    }
+    fs.writeFileSync(path.join(__dirname, "../../database/users.json"), JSON.stringify(users), {
+        encoding: "utf-8",
+        flag: "w+"
+    })
     return users;
 }
 

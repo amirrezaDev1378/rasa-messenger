@@ -4,6 +4,7 @@ import type {AppState, AppThunk} from '@/app/store'
 import {store} from "@/app/store"
 import {useLoadRecentMessages, useLoadRecentMessagesById} from "@/app/useLoadRecentMessages";
 import {useGetUserInfoById} from "@/app/useGetUserInfo";
+import {useUpdateMessages} from "@/app/useUpdateMessages";
 
 
 export interface PostsStates {
@@ -46,9 +47,25 @@ export const messagesSlice = createSlice({
     initialState,
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
-        loadPostData: (state) => {
-            // console.log(state)
+        addMessage: (state, action) => {
+            if (state.status === "idle") {
+                let currentMessages = JSON.parse(state.messages);
+                action.payload.isLocalUser = true;
+                currentMessages.messages.push(action.payload);
+                state.messages = JSON.stringify(currentMessages);
+                useUpdateMessages(currentMessages.id, currentMessages)
+            }
+
         },
+        addServerMessage: (state, action) => {
+            if (state.status === "idle") {
+                let currentMessages = JSON.parse(state.messages);
+                console.log(currentMessages)
+                currentMessages.messages.push(action.payload);
+                state.messages = JSON.stringify(currentMessages);
+                useUpdateMessages(currentMessages.id, currentMessages)
+            }
+        }
         // changeCurrentChat: (state, action) => {
         //     console.log("hey dude")
         //
@@ -92,4 +109,5 @@ export const selectData = (state: AppState) => state.messages;
 
 // We can also write thunks by hand, which may contain both sync and async logic.
 // Here's an example of conditionally dispatching actions based on current state.
+export const {addMessage , addServerMessage} = messagesSlice.actions;
 export default messagesSlice.reducer;

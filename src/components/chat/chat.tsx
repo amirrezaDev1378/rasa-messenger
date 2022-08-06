@@ -1,4 +1,4 @@
-import React, {Fragment, Suspense} from 'react';
+import React from 'react';
 import {Avatar, Stack, Typography} from "@mui/material";
 import styles from "./styles.module.scss";
 import Image from "next/image";
@@ -23,7 +23,6 @@ export const changeIdColor = (text: string): string => {
 export const addLineBreak = (text: string): string => {
     console.log(text)
     return text.split(" ").map((item, index) => {
-        let i = index+1;
         if ((index+1) % 8 === 0) {
             return item + "<br>";
         }
