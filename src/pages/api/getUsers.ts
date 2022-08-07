@@ -36,15 +36,16 @@ const getRandomUsers = async () => {
             avatar: await getAvatar(gender)
         })
     }
-    if (!fs.existsSync(path.join(__dirname, "../../database/"))){
+    if (!fs.existsSync(path.join(process.cwd(), "./src/database"))) {
 
-        fs.mkdirSync(path.join(__dirname, "../../database/"))
+        fs.mkdirSync(path.join(process.cwd(), "./src/database"))
 
     }
-    fs.writeFileSync(path.join(__dirname, "../../database/users.json"), JSON.stringify(users), {
+    fs.writeFileSync(path.join(process.cwd(), "./src/database/users.json"), JSON.stringify(users), {
         encoding: "utf-8",
         flag: "w+"
     })
+
     return users;
 }
 

@@ -105,6 +105,7 @@ export const messagesSlice = createSlice({
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 export const selectData = (state: AppState) => state.messages;
+export const selectUserData = (state: AppState) => state.messages.currentUser;
 
 
 // We can also write thunks by hand, which may contain both sync and async logic.
