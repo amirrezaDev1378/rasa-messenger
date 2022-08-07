@@ -2,11 +2,14 @@
   "name": "rasa-messenger",
   "private": true,
   "scripts": {
+    "server-install": "cd ./api && npm install",
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "server" : "cd ./api && npm start"
+
   },
   "dependencies": {
     "@emotion/cache": "^11.7.1",
